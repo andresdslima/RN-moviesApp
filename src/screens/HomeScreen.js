@@ -33,12 +33,12 @@ export function HomeScreen() {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={{ height: 400, marginTop: 20 }}>
+        <View style={{ height: 400, marginTop: 20, width: windowWidth }}>
           <Carousel
             data={nowPlaying}
             renderItem={({ item }) => <MoviePoster movie={item} />}
             sliderWidth={windowWidth}
-            itemWidth={290}
+            itemWidth={windowWidth / 1.25}
             inactiveSlideOpacity={0.9}
           />
         </View>
