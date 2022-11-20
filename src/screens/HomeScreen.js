@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   ActivityIndicator,
@@ -11,6 +11,7 @@ import Carousel from 'react-native-snap-carousel';
 import { useMovies } from '../hooks/useMovies';
 import { MoviePoster } from '../components/MoviePoster';
 import { HorizontalSlider } from '../components/HorizontalSlider';
+import SplashScreen from 'react-native-splash-screen';
 
 const { width: windowWidth } = Dimensions.get('window');
 
@@ -24,6 +25,10 @@ export function HomeScreen() {
       </View>
     );
   }
+
+  // useEffect(() => {
+  //   SplashScreen.hide();
+  // }, []);
 
   return (
     <SafeAreaView>
