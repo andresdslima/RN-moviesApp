@@ -15,7 +15,11 @@ export function Navigation() {
         },
       }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen name="DetailScreen" component={DetailScreen} />
+      <Stack.Screen
+        name="DetailScreen"
+        component={DetailScreen}
+        options={{ cardStyle: { backgroundColor: '#fff' } }}
+      />
     </Stack.Navigator>
   );
 }

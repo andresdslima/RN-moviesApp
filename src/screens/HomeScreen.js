@@ -5,18 +5,17 @@ import {
   StyleSheet,
   SafeAreaView,
   Dimensions,
-  FlatList,
-  Text,
   ScrollView,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { useMovies } from '../hooks/useMovies';
 import { MoviePoster } from '../components/MoviePoster';
+import { HorizontalSlider } from '../components/HorizontalSlider';
 
 const { width: windowWidth } = Dimensions.get('window');
 
 export function HomeScreen() {
-  const { isLoading, moviesToday } = useMovies();
+  const { isLoading, nowPlaying, popular, topRated, upcoming } = useMovies();
 
   if (isLoading) {
     return (
@@ -29,26 +28,19 @@ export function HomeScreen() {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={{ height: 420, marginTop: 20 }}>
+        <View style={{ height: 400, marginTop: 20 }}>
           <Carousel
-            data={moviesToday}
+            data={nowPlaying}
             renderItem={({ item }) => <MoviePoster movie={item} />}
             sliderWidth={windowWidth}
-            itemWidth={300}
+            itemWidth={290}
+            inactiveSlideOpacity={0.9}
           />
         </View>
-        <View style={{ height: 240 }}>
-          <Text style={styles.title}>Popular</Text>
-          <FlatList
-            data={moviesToday}
-            renderItem={({ item }) => (
-              <MoviePoster movie={item} width={140} height={200} />
-            )}
-            keyExtractor={item => item.id.toString()}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
+
+        <HorizontalSlider title="Popular" movies={popular} />
+        <HorizontalSlider title="Top rated" movies={topRated} />
+        <HorizontalSlider title="Upcoming" movies={upcoming} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -59,11 +51,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginLeft: 20,
-    color: '#000',
   },
 });

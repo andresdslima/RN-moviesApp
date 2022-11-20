@@ -1,15 +1,20 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 export function MoviePoster({ movie, height = 400, width = 300 }) {
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+  const navigation = useNavigation();
 
   return (
-    <View style={{ width, height }}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('DetailScreen', movie)}
+      activeOpacity={0.8}
+      style={{ width, height, paddingBottom: 10 }}>
       <View style={styles.imageContainer}>
         <Image source={{ uri }} style={styles.image} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
